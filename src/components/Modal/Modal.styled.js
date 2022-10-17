@@ -13,6 +13,17 @@ export const Overlay = styled.div`
 `;
 
 export const FullImage = styled.div`
-  max-width: calc(100vw - 48px);
+  max-width: calc(70vw - 48px);
   max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background-color: #ffffff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: #d1d1d1;
+  }
 `;

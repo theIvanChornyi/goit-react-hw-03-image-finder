@@ -17,12 +17,21 @@ export class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { request, page } = this.state;
+    const { request, page, modalPicture } = this.state;
+    // Генерация запросов
+
     if (prevState.request !== request || prevState.page !== page) {
       this.requestColection(this.state);
     }
-  }
+    // Обезскроливание))
 
+    if (modalPicture) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }
+  // Галерея
   addUserRequest = newRequest => {
     this.setState({
       request: newRequest,
@@ -31,16 +40,6 @@ export class App extends Component {
       condition: 'pending',
     });
   };
-
-  toggleModal = data => {
-    this.setState({ modalPicture: data });
-  };
-  mouseClose = e => {
-    if (e.target === e.currentTarget) {
-      this.setState({ modalPicture: '' });
-    }
-  };
-
   requestColection = async ({ request, page }) => {
     try {
       const { data } = await getImagesResponse(request, page);
@@ -53,8 +52,24 @@ export class App extends Component {
     }
   };
 
+  // Пагинация
+
   loadMore = () => {
     this.setState(pS => ({ page: pS.page + 1 }));
+  };
+
+  // Логика модалки
+
+  toggleModal = data => {
+    this.setState({ modalPicture: data });
+  };
+  mouseClose = e => {
+    if (e.target === e.currentTarget) {
+      this.setState({ modalPicture: '' });
+    }
+  };
+  keyClose = e => {
+    if (e.code === 'Escape') this.setState({ modalPicture: '' });
   };
 
   render() {
@@ -63,7 +78,11 @@ export class App extends Component {
     return (
       <SearchingImageApp>
         {modalPicture && (
-          <Modal picture={modalPicture} close={this.mouseClose} />
+          <Modal
+            picture={modalPicture}
+            mouseClose={this.mouseClose}
+            keyClose={this.keyClose}
+          />
         )}
         <Searchbar getImages={this.addUserRequest} />
         <ImageGallery images={images} openModal={this.toggleModal} />
