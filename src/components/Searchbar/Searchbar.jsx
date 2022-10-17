@@ -1,5 +1,7 @@
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import { ImSearch } from 'react-icons/im';
+
+import { SearchSchema } from './ValidationSchema';
 import {
   Header,
   SearchForm,
@@ -8,12 +10,13 @@ import {
   SearchFormInp,
 } from './Searchbar.styled';
 
-export const Searchbar = () => (
+export const Searchbar = ({ getImages }) => (
   <Header>
     <Formik
+      validationSchema={SearchSchema}
       initialValues={{ image: '' }}
       onSubmit={({ image }) => {
-        console.log(image.trim());
+        getImages(image.trim());
       }}
     >
       <SearchForm>
@@ -30,6 +33,7 @@ export const Searchbar = () => (
           autoFocus
           placeholder="Search images and photos"
         />
+        <ErrorMessage component="div" name="image" />
       </SearchForm>
     </Formik>
   </Header>

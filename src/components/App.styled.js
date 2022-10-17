@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { App } from './App';
-export const SearchingImageApp = styled(App)`
+export const SearchingImageApp = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 16px;
