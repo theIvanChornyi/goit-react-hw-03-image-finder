@@ -6,6 +6,7 @@ import { Button } from 'components/Button';
 import { getImagesResponse } from 'services/API/pixabay';
 import { SearchingImageApp } from './App.styled';
 import { Modal } from 'components/Modal';
+import { Loader } from 'components/Loader';
 
 export class App extends Component {
   state = {
@@ -41,6 +42,7 @@ export class App extends Component {
     });
   };
   requestColection = async ({ request, page }) => {
+    this.setState({ condition: 'load' });
     try {
       const { data } = await getImagesResponse(request, page);
       this.setState(pS => ({
@@ -73,7 +75,7 @@ export class App extends Component {
   };
 
   render() {
-    const { images, condition, request, modalPicture } = this.state;
+    const { images, request, modalPicture, page, condition } = this.state;
 
     return (
       <SearchingImageApp>
@@ -86,7 +88,8 @@ export class App extends Component {
         )}
         <Searchbar getImages={this.addUserRequest} />
         <ImageGallery images={images} openModal={this.toggleModal} />
-        {condition === 'resolved' && (
+        {condition === 'load' && <Loader />}
+        {images.length / 12 === page && (
           <Button onClick={this.loadMore} name={request}></Button>
         )}
       </SearchingImageApp>
