@@ -74,7 +74,7 @@ export const SearchFormInp = styled(Field)`
 `;
 export const ErrorLabel = styled(ErrorMessage)`
   position: absolute;
-  opacity: 70%;
+  opacity: 90%;
   top: 70px;
   left: 50%;
   transform: translateX(-50%);

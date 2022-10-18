@@ -5,6 +5,6 @@ export const SearchSchema = yup.object().shape({
     .string()
     .matches(
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-      "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+      'Name may contain only letters, apostrophe, dash and spaces. For example Cat, Candy fridge, Gelatine'
     ),
 });
