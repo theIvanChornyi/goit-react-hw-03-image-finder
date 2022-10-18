@@ -1,4 +1,5 @@
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { Overlay, FullImage } from './Modal.styled';
 
@@ -29,3 +30,9 @@ export class Modal extends Component {
     );
   }
 }
+
+Modal.propTypes = {
+  largeImageURL: PropTypes.string,
+  tags: PropTypes.string,
+  keyClose: PropTypes.func,
+};

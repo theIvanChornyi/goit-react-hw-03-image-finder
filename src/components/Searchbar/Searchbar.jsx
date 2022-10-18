@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Formik, ErrorMessage } from 'formik';
 import { ImSearch } from 'react-icons/im';
 
@@ -38,3 +39,7 @@ export const Searchbar = ({ getImages }) => (
     </Formik>
   </Header>
 );
+
+Searchbar.propTypes = {
+  getImages: PropTypes.func.isRequired,
+};

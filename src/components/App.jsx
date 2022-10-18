@@ -18,13 +18,20 @@ export class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { request, page, modalPicture } = this.state;
-    // Генерация запросов
+    const { request, page, modalPicture, condition, images } = this.state;
 
     if (prevState.request !== request || prevState.page !== page) {
       this.requestColection(this.state);
     }
-    // Обезскроливание))
+    if (condition === 'resolved' && images.length > 12) {
+      const { height } = document
+        .querySelector('#galery')
+        .getBoundingClientRect();
+      window.scrollBy({
+        top: height,
+        behavior: 'smooth',
+      });
+    }
 
     if (modalPicture) {
       document.body.style.overflow = 'hidden';
@@ -32,7 +39,7 @@ export class App extends Component {
       document.body.style.overflow = 'unset';
     }
   }
-  // Галерея
+
   addUserRequest = newRequest => {
     this.setState({
       request: newRequest,
@@ -54,13 +61,9 @@ export class App extends Component {
     }
   };
 
-  // Пагинация
-
   loadMore = () => {
     this.setState(pS => ({ page: pS.page + 1 }));
   };
-
-  // Логика модалки
 
   toggleModal = data => {
     this.setState({ modalPicture: data });
@@ -76,7 +79,6 @@ export class App extends Component {
 
   render() {
     const { images, request, modalPicture, page, condition } = this.state;
-
     return (
       <SearchingImageApp>
         {modalPicture && (
