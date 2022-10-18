@@ -23,7 +23,11 @@ export class App extends Component {
     if (prevState.request !== request || prevState.page !== page) {
       this.requestColection(this.state);
     }
-    if (condition === 'resolved' && images.length > 12) {
+    if (
+      condition === 'resolved' &&
+      images.length > prevState.images.length &&
+      images.length > 12
+    ) {
       const { height } = document
         .querySelector('#galery')
         .getBoundingClientRect();
