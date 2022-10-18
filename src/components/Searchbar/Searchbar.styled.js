@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Field, Form } from 'formik';
+import { Field, Form, ErrorMessage } from 'formik';
 
 export const Header = styled.header`
   top: 0;
@@ -71,4 +71,16 @@ export const SearchFormInp = styled(Field)`
     font: inherit;
     font-size: 18px;
   }
+`;
+export const ErrorLabel = styled(ErrorMessage)`
+  position: absolute;
+  opacity: 70%;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  padding: 15px;
+  background: yellow;
+  color: red;
+  border-radius: 3px;
 `;

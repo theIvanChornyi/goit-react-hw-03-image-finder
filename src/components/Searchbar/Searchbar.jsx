@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import { ImSearch } from 'react-icons/im';
 
 import { SearchSchema } from './ValidationSchema';
@@ -9,6 +9,7 @@ import {
   FormBtn,
   FormBtnLabel,
   SearchFormInp,
+  ErrorLabel,
 } from './Searchbar.styled';
 
 export const Searchbar = ({ getImages }) => (
@@ -34,7 +35,7 @@ export const Searchbar = ({ getImages }) => (
           autoFocus
           placeholder="Search images and photos"
         />
-        <ErrorMessage component="div" name="image" />
+        <ErrorLabel component="div" name="image" />
       </SearchForm>
     </Formik>
   </Header>
